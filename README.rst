@@ -1,5 +1,8 @@
 .. image:: https://travis-ci.org/blue-yonder/storefact.svg?branch=master
     :target: https://travis-ci.org/blue-yonder/storefact
+.. image:: https://coveralls.io/repos/github/blue-yonder/storefact/badge.svg?branch=master
+    :target: https://coveralls.io/github/blue-yonder/storefact?branch=master
+
 
 ==========================
 Store factory for simplekv

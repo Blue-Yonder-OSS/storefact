@@ -3,5 +3,8 @@ sudo: false
 env:
 - TOXENV=py27
 - TOXENV=py35
-install: pip install tox
+install:
+ - pip install tox coveralls
 script: tox
+after_success:
+ - coveralls
