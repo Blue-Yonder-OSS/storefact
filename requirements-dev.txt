@@ -5,3 +5,4 @@ reno
 pytest
 pytest-cov
 coverage
+-e git+https://github.com/mbr/simplekv.git@0.11.0#egg=simplekv
