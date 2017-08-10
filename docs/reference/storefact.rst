@@ -1,0 +1,5 @@
+storefact
+=========
+
+.. automodule:: storefact
+    :members:

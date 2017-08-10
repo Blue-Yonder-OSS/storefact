@@ -1,0 +1,7 @@
+setuptools_scm
+sphinx
+sphinx_rtd_theme
+reno
+pytest
+pytest-cov
+coverage
