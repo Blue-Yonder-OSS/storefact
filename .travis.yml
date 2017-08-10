@@ -1,0 +1,7 @@
+language: python
+sudo: false
+env:
+- TOXENV=py27
+- TOXENV=py35
+install: pip install tox
+script: tox
