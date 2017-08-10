@@ -21,7 +21,7 @@ extlinks = {'issue': ('https://github.com/blue-yonder/storefact/issues/%s', 'iss
 source_suffix = '.rst'
 master_doc = 'index'
 project = u'Store factory for simplekv'
-copyright = u'2015-2017 Blue Yonder'
+copyright = u'2015-2017 Blue Yonder GmbH'
 version = get_version(root='..')
 
 import sphinx_rtd_theme
