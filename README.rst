@@ -2,7 +2,9 @@
     :target: https://travis-ci.org/blue-yonder/storefact
 .. image:: https://coveralls.io/repos/github/blue-yonder/storefact/badge.svg?branch=master
     :target: https://coveralls.io/github/blue-yonder/storefact?branch=master
-
+.. image:: https://readthedocs.org/projects/storefact/badge/?version=latest
+    :target: http://storefact.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 ==========================
 Store factory for simplekv
