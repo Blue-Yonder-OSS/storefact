@@ -1,6 +1,8 @@
 ==========================
 Store factory for simplekv
 ==========================
+.. image:: https://travis-ci.org/blue-yonder/storefact.svg?branch=master
+    :target: https://travis-ci.org/blue-yonder/storefact
 
 A factory for simplekv-Store-based storage classes. Takes configuration values and returns a simplekv-Store
 
