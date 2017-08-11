@@ -37,9 +37,10 @@ Installation
 Usage
 =====
 There are two possibilities to use storefact.
+
 1) Use a dictionary with configuration data (e.g. loaded from an ini file)
 
-::
+.. code-block:: python
 
     from storefact import get_store
 
@@ -52,9 +53,9 @@ There are two possibilities to use storefact.
     store.put(u'key', b'value')
     assert store.get(u'key) == 'value'
 
-2) Use an URL
+2) Use an URL to specify the configuration
 
-::
+.. code-block:: python
 
     from storefact import get_store_from_url, get_store
 
