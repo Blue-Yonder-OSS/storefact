@@ -13,8 +13,16 @@ Store factory for simplekv_
 A factory for simplekv_-Store-based storage classes. Takes configuration values and returns a simplekv_-Store.
 
 This allows one to easily deploy a blob-based store in production, but test with a filesystem-based store in development.
+The following simplekv_-Stores are supported in storefact:
 
-* Free software: BSD license
+* DictStore
+* RedisStore
+* FilesystemStore
+* BotoStore (Amazon S3)
+* AzureBlockBlobStorage
+
+
+Storefact is released as open source under the 3-clause BSD license.
 
 .. _simplekv: https://github.com/mbr/simplekv
 
