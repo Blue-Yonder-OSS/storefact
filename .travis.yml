@@ -5,6 +5,7 @@ env:
 - TOXENV=py35
 install:
  - pip install tox coveralls
+ - pip install git+https://github.com/mbr/simplekv.git@0.11.0
 script: tox
 after_success:
  - coveralls
