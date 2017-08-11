@@ -28,7 +28,6 @@ setup(
     url="https://github.com/blue-yonder/storefact",
     packages=['storefact'],
     classifiers=[
-        'Private Package - Do Not Upload',  # this makes uploading to pypi fail
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Operating System :: Unix",
