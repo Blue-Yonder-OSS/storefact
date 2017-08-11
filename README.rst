@@ -6,13 +6,18 @@
     :target: http://storefact.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-==========================
-Store factory for simplekv
-==========================
+===========================
+Store factory for simplekv_
+===========================
 
-A factory for simplekv-Store-based storage classes. Takes configuration values and returns a simplekv-Store
+A factory for simplekv_-Store-based storage classes. Takes configuration values and returns a simplekv_-Store.
+
+This allows one to easily deploy a blob-based store in production, but test with a filesystem-based store in development.
 
 * Free software: BSD license
+
+.. _simplekv: https://github.com/mbr/simplekv
+
 
 Installation
 ============
@@ -21,11 +26,40 @@ Installation
 
     pip install storefact
 
+Usage
+=====
+There are two possibilities to use storefact.
+1) Use a dictionary with configuration data (e.g. loaded from an ini file)
+
+::
+
+    from storefact import get_store
+
+    params = {
+        'account_name': 'test',
+        'account_key': 'XXXsome_azure_account_keyXXX',
+        'container': 'my-azure-container',
+    }
+    store = get_store('azure', **params)
+    store.put(u'key', b'value')
+    assert store.get(u'key) == 'value'
+
+2) Use an URL
+
+::
+
+    from storefact import get_store_from_url, get_store
+
+    store = get_store_from_url('azure://test:XXXsome_azure_account_keyXXX@my-azure-container')
+    store.put(u'key', b'value')
+    assert store.get(u'key) == 'value'
+
 Documentation
 =============
 
+The documentation can be found on readthedocs_.
 
-https://storefact.readthedocs.io/
+.. _readthedocs: https://storefact.readthedocs.io/
 
 Development
 ===========
