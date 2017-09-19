@@ -1,8 +1,13 @@
 language: python
 sudo: false
-env:
-- TOXENV=py27
-- TOXENV=py35
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=py27
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
 install:
  - pip install tox coveralls
  - pip install git+https://github.com/mbr/simplekv.git@0.11.0
