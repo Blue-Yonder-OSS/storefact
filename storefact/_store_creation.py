@@ -37,7 +37,8 @@ def _create_store_azure(type, params):
 @create_store.register(type='hs3')
 @create_store.register(type='boto')
 def _create_store_hs3(type, params):
-    from ._boto import HBotoStore, _get_s3bucket
+    from ._boto import _get_s3bucket
+    from ._hstores import HBotoStore
     return HBotoStore(_get_s3bucket(**params))
 
 
