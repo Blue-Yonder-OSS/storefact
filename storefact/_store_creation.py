@@ -21,11 +21,9 @@ def _create_store_azure(type, params):
     from simplekv.net.azurestore import AzureBlockBlobStore
     from ._hstores import HAzureBlockBlobStore
 
-    if 'connection_string' not in params:
-        conn_string = _build_azure_url(**params)
-    else:
-        conn_string = params['connection_string']
-    if params['create_if_missing'] and params['use_sas']:
+    conn_string = params.get('connection_string', _build_azure_url(**params))
+    
+    if params['create_if_missing'] and params.get('use_sas', False):
         raise Exception('create_if_missing is incompatible with the use of SAS tokens.')
 
     if type == 'azure':
