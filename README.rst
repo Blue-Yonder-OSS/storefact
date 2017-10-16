@@ -51,7 +51,7 @@ There are two possibilities to use storefact.
     }
     store = get_store('azure', **params)
     store.put(u'key', b'value')
-    assert store.get(u'key) == b'value'
+    assert store.get(u'key') == b'value'
 
 2) Use an URL to specify the configuration
 
@@ -61,7 +61,7 @@ There are two possibilities to use storefact.
 
     store = get_store_from_url('azure://test:XXXsome_azure_account_keyXXX@my-azure-container')
     store.put(u'key', b'value')
-    assert store.get(u'key) == b'value'
+    assert store.get(u'key') == b'value'
 
 Documentation
 =============
