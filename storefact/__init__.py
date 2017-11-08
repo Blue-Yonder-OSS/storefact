@@ -51,7 +51,7 @@ def get_store(type, create_if_missing=True, **params):
 
     * ``"azure"``: Returns a ``simplekv.azure.AzureBlockBlobStorage``. Parameters are
       ``"account_name"``, ``"account_key"``, ``"container"``, ``"use_sas"`` and ``"create_if_missing"`` (default: ``True``).
-      ``"create_if_missing"`` has to be ``False`` if ``"use_sas"`` is set. When ``"uses_sas"`` is set,
+      ``"create_if_missing"`` has to be ``False`` if ``"use_sas"`` is set. When ``"use_sas"`` is set,
       ``"account_key"`` is interpreted as Shared Access Signature (SAS) token.FIRE
     * ``"s3"``: Returns a plain ``simplekv.net.botostore.BotoStore``.
       Parameters must include ``"host"``, ``"bucket"``, ``"access_key"``, ``"secret_key"``.
