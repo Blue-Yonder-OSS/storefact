@@ -32,7 +32,7 @@ good_urls = [
 
 bad_urls = [
     (u'azure://MYACCOUNT:deadb/eef@1buc-ket1?param1=foo&param2=🍺&eat_more_🍎=1&create_if_missing=true',
-     AttributeError,
+     ValueError,
     ),
 ]
 

@@ -85,7 +85,7 @@ def extract_params_fs(scheme, host, port, path, query, userinfo):
 @extract_params.register(scheme='s3')
 @extract_params.register(scheme='hs3')
 def extract_params_s3(scheme, host, port, path, query, userinfo):
-    access_key, secret_key = userinfo.split(u':', 1)
+    access_key, secret_key = _parse_userinfo(userinfo)
     params = {
         'host': u'{}:{}'.format(host, port) if port else host,
         'access_key': access_key,
@@ -98,7 +98,7 @@ def extract_params_s3(scheme, host, port, path, query, userinfo):
 @extract_params.register(scheme='hazure')
 @extract_params.register(scheme='azure')
 def extract_params_azure(scheme, host, port, path, query, userinfo):
-    account_name, account_key = userinfo.split(u':', 1)
+    account_name, account_key = _parse_userinfo(userinfo)
     params = {
         'account_name': account_name,
         'account_key': account_key,
@@ -107,3 +107,16 @@ def extract_params_azure(scheme, host, port, path, query, userinfo):
     if u'use_sas' in query:
         params['use_sas'] = True
     return params
+
+
+def _parse_userinfo(userinfo):
+    """Try to split the URL's userinfo (the part between :// and @) into fields
+    separated by :. If anything looks wrong, remind user to percent-encode values."""
+    if hasattr(userinfo, 'split'):
+        parts = userinfo.split(u':', 1)
+
+        if len(parts) == 2:
+            return parts
+
+    raise ValueError('Could not parse user/key in store-URL. Note that values have to be percent-encoded, eg. with urllib.quote_plus().')
+
