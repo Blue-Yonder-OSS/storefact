@@ -43,7 +43,7 @@ setup(
     install_requires=instreq,
     extras_require={
         's3': ['boto'],
-        'azure': ['azure-storage>=0.33'],
+        'azure': ['azure-storage-blob'],
     },
     setup_requires=['setuptools_scm']
 )
