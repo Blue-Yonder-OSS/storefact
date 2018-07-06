@@ -27,9 +27,21 @@ def _create_store_azure(type, params):
         raise Exception('create_if_missing is incompatible with the use of SAS tokens.')
 
     if type == 'azure':
-        return AzureBlockBlobStore(conn_string=conn_string, container=params['container'], public=False, create_if_missing=params['create_if_missing'])
+        return AzureBlockBlobStore(
+            conn_string=conn_string,
+            container=params['container'],
+            public=False,
+            create_if_missing=params['create_if_missing'],
+            checksum=params.get('checksum', True),
+        )
     else:
-        return HAzureBlockBlobStore(conn_string=conn_string, container=params['container'], public=False, create_if_missing=params['create_if_missing'])
+        return HAzureBlockBlobStore(
+            conn_string=conn_string,
+            container=params['container'],
+            public=False,
+            create_if_missing=params['create_if_missing'],
+            checksum=params.get('checksum', True),
+        )
 
 
 @create_store.register(type='hs3')
