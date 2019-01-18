@@ -7,16 +7,28 @@ import os
 import os.path
 
 from simplekv.fs import FilesystemStore
-import reg
 
 
-@reg.dispatch(reg.match_key('type'))
 def create_store(type, params):
+    if type in ('azure', 'hazure'):
+        return _create_store_azure(type, params)
+    if type in ('hs3', 'boto'):
+        return _create_store_hs3(type, params)
+    if type in ('s3'):
+        return _create_store_s3(type, params)
+    if type in ('hfs', 'hfile', 'filesystem'):
+        return _create_store_hfs(type, params)
+    if type in ('fs', 'file'):
+        return _create_store_fs(type, params)
+    if type in ('memory'):
+        return _create_store_mem(type, params)
+    if type in ('hmemory'):
+        return _create_store_hmem(type, params)
+    if type in ('redis'):
+        return _create_store_redis(type, params)
     raise ValueError('Unknown store type: ' + str(type))
 
 
-@create_store.register(type='hazure')
-@create_store.register(type='azure')
 def _create_store_azure(type, params):
     from simplekv.net.azurestore import AzureBlockBlobStore
     from ._hstores import HAzureBlockBlobStore
@@ -44,24 +56,18 @@ def _create_store_azure(type, params):
         )
 
 
-@create_store.register(type='hs3')
-@create_store.register(type='boto')
 def _create_store_hs3(type, params):
     from ._boto import _get_s3bucket
     from ._hstores import HBotoStore
     return HBotoStore(_get_s3bucket(**params))
 
 
-@create_store.register(type='s3')
 def _create_store_s3(type, params):
     from simplekv.net.botostore import BotoStore
     from ._boto import _get_s3bucket
     return BotoStore(_get_s3bucket(**params))
 
 
-@create_store.register(type='hfs')
-@create_store.register(type='hfile')
-@create_store.register(type='filesystem')
 def _create_store_hfs(type, params):
     if params['create_if_missing'] and not os.path.exists(params['path']):
         os.makedirs(params['path'])
@@ -69,27 +75,22 @@ def _create_store_hfs(type, params):
     return HFilesystemStore(params['path'])
 
 
-@create_store.register(type='fs')
-@create_store.register(type='file')
 def _create_store_fs(type, params):
     if params['create_if_missing'] and not os.path.exists(params['path']):
         os.makedirs(params['path'])
     return FilesystemStore(params['path'])
 
 
-@create_store.register(type='memory')
 def _create_store_mem(type, params):
     from simplekv.memory import DictStore
     return DictStore()
 
 
-@create_store.register(type='hmemory')
-def _create_store_mem(type, params):
+def _create_store_hmem(type, params):
     from ._hstores import HDictStore
     return HDictStore()
 
 
-@create_store.register(type='redis')
 def _create_store_redis(type, params):
     from simplekv.memory.redisstore import RedisStore
     from redis import StrictRedis

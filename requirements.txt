@@ -1,4 +1,3 @@
 simplekv>=0.11.9
 uritools
 toolz
-reg

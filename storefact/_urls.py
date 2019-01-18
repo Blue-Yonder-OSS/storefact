@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import reg
 from uritools import urisplit
 
 
@@ -51,62 +50,42 @@ def url2dict(url, raise_on_extra_params=False):
     return params
 
 
-@reg.dispatch(reg.match_key('scheme', lambda scheme, host, port, path, query, userinfo: scheme))
 def extract_params(scheme, host, port, path, query, userinfo):
+    if scheme in ('memory', 'hmemory'):
+        return {}
+    if scheme in ('redis', 'hredis'):
+        path = path[1:] if path.startswith(u'/') else path
+        params = {'host': host or u'localhost'}
+        if port:
+            params['port'] = port
+        if userinfo:
+            params['password'] = userinfo
+        if path:
+            params['db'] = int(path)
+        return params
+    if scheme in ('fs', 'hfs'):
+        return {'type': scheme, 'path': host + path}
+    if scheme in ('s3', 'hs3'):
+        access_key, secret_key = _parse_userinfo(userinfo)
+        params = {
+            'host': u'{}:{}'.format(host, port) if port else host,
+            'access_key': access_key,
+            'secret_key': secret_key,
+            'bucket': path[1:],
+        }
+        return params
+    if scheme in ('azure', 'hazure'):
+        account_name, account_key = _parse_userinfo(userinfo)
+        params = {
+            'account_name': account_name,
+            'account_key': account_key,
+            'container': host,
+        }
+        if u'use_sas' in query:
+            params['use_sas'] = True
+        return params
+
     raise ValueError('Unknown storage type "{}"'.format(scheme))
-
-
-@extract_params.register(scheme='hmemory')
-@extract_params.register(scheme='memory')
-def extract_params_memory(scheme, host, port, path, query, userinfo):
-    return {}
-
-
-@extract_params.register(scheme='hredis')
-@extract_params.register(scheme='redis')
-def extract_params_redis(scheme, host, port, path, query, userinfo):
-    path = path[1:] if path.startswith(u'/') else path
-    params = {'host': host or u'localhost'}
-    if port:
-        params['port'] = port
-    if userinfo:
-        params['password'] = userinfo
-    if path:
-        params['db'] = int(path)
-    return params
-
-
-@extract_params.register(scheme='fs')
-@extract_params.register(scheme='hfs')
-def extract_params_fs(scheme, host, port, path, query, userinfo):
-    return {'type': scheme, 'path': host + path}
-
-
-@extract_params.register(scheme='s3')
-@extract_params.register(scheme='hs3')
-def extract_params_s3(scheme, host, port, path, query, userinfo):
-    access_key, secret_key = _parse_userinfo(userinfo)
-    params = {
-        'host': u'{}:{}'.format(host, port) if port else host,
-        'access_key': access_key,
-        'secret_key': secret_key,
-        'bucket': path[1:],
-    }
-    return params
-
-
-@extract_params.register(scheme='hazure')
-@extract_params.register(scheme='azure')
-def extract_params_azure(scheme, host, port, path, query, userinfo):
-    account_name, account_key = _parse_userinfo(userinfo)
-    params = {
-        'account_name': account_name,
-        'account_key': account_key,
-        'container': host,
-    }
-    if u'use_sas' in query:
-        params['use_sas'] = True
-    return params
 
 
 def _parse_userinfo(userinfo):
