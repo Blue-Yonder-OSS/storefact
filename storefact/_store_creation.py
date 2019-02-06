@@ -34,7 +34,7 @@ def _create_store_azure(type, params):
     from ._hstores import HAzureBlockBlobStore
 
     conn_string = params.get('connection_string', _build_azure_url(**params))
-    
+
     if params['create_if_missing'] and params.get('use_sas', False):
         raise Exception('create_if_missing is incompatible with the use of SAS tokens.')
 
@@ -45,6 +45,7 @@ def _create_store_azure(type, params):
             public=False,
             create_if_missing=params['create_if_missing'],
             checksum=params.get('checksum', True),
+            max_connections=params.get('max_connections', 2),
         )
     else:
         return HAzureBlockBlobStore(
@@ -53,6 +54,7 @@ def _create_store_azure(type, params):
             public=False,
             create_if_missing=params['create_if_missing'],
             checksum=params.get('checksum', True),
+            max_connections=params.get('max_connections', 2),
         )
 
 
