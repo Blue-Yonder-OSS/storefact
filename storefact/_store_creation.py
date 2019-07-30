@@ -46,7 +46,7 @@ def _create_store_azure(type, params):
             create_if_missing=params['create_if_missing'],
             checksum=params.get('checksum', True),
             max_connections=params.get('max_connections', 2),
-            socket_timeout=params.get('socket_timeout', 100),
+            socket_timeout=params.get('socket_timeout', (20,100)),
         )
     else:
         return HAzureBlockBlobStore(
@@ -56,7 +56,7 @@ def _create_store_azure(type, params):
             create_if_missing=params['create_if_missing'],
             checksum=params.get('checksum', True),
             max_connections=params.get('max_connections', 2),
-            socket_timeout=params.get('socket_timeout', 100),
+            socket_timeout=params.get('socket_timeout', (20,100)),
         )
 
 
@@ -104,12 +104,12 @@ def _create_store_redis(type, params):
 
 def _build_azure_url(
     account_name=None, account_key=None, default_endpoints_protocol=None, blob_endpoint=None,
-        use_sas=False,socket_timeout=100, **kwargs):
+        use_sas=False, **kwargs):
     protocol = default_endpoints_protocol or 'https'
     if use_sas:
         return ('DefaultEndpointsProtocol={protocol};AccountName={account_name};'
-                'SharedAccessSignature={shared_access_signature};socket_timeout={socket_timeout}'.format(
-                    protocol=protocol, account_name=account_name, shared_access_signature=account_key,socket_timeout=socket_timeout))
+                'SharedAccessSignature={shared_access_signature}'.format(
+                    protocol=protocol, account_name=account_name, shared_access_signature=account_key))
     else:
-        return 'DefaultEndpointsProtocol={protocol};AccountName={account_name};AccountKey={account_key};socket_timeout={socket_timeout}'.format(
-            protocol=protocol, account_name=account_name, account_key=account_key,socket_timeout=socket_timeout)
+        return 'DefaultEndpointsProtocol={protocol};AccountName={account_name};AccountKey={account_key}'.format(
+            protocol=protocol, account_name=account_name, account_key=account_key)
