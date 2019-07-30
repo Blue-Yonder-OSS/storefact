@@ -46,7 +46,7 @@ def _create_store_azure(type, params):
             create_if_missing=params['create_if_missing'],
             checksum=params.get('checksum', True),
             max_connections=params.get('max_connections', 2),
-            socket_timeout=params.get('socket_timeout', (20,100)),
+            socket_timeout=params.get('socket_timeout', (20, 100)),
         )
     else:
         return HAzureBlockBlobStore(
@@ -56,7 +56,7 @@ def _create_store_azure(type, params):
             create_if_missing=params['create_if_missing'],
             checksum=params.get('checksum', True),
             max_connections=params.get('max_connections', 2),
-            socket_timeout=params.get('socket_timeout', (20,100)),
+            socket_timeout=params.get('socket_timeout', (20, 100)),
         )
 
 
