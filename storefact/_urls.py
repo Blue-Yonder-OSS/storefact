@@ -85,6 +85,8 @@ def extract_params(scheme, host, port, path, query, userinfo):
             params['use_sas'] = True
         if u'max_connections' in query:
             params['max_connections'] = int(query.pop(u'max_connections')[-1])
+        if u'socket_timeout' in query:
+            params['socket_timeout'] = int(query.pop(u'socket_timeout')[-1])
         return params
 
     raise ValueError('Unknown storage type "{}"'.format(scheme))
