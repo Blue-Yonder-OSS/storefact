@@ -118,6 +118,7 @@ def test_create_store_hfs(mocker):
     )
     mock_hfs.assert_called_once_with('this/is/a/relative/path')
 
+
 @pytest.mark.skip(reason="some issue here")
 def test_create_store_fs(mocker):
     mock_fs = mocker.patch("simplekv.fs.FilesystemStore")

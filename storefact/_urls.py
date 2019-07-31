@@ -17,7 +17,7 @@ def url2dict(url, raise_on_extra_params=False):
     fs://path
     s3://access_key:secret_key@endpoint/bucket[?create_if_missing=true]
     azure://account_name:account_key@container[?create_if_missing=true][?max_connections=2]
-    azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2]
+    azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)]
     """
     u = urisplit(url)
     parsed = dict(
