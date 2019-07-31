@@ -4,5 +4,6 @@ sphinx_rtd_theme
 reno
 pytest
 pytest-cov
+pytest-mock
 coverage
 simplekv

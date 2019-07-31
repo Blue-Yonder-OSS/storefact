@@ -54,6 +54,7 @@ def get_store(type, create_if_missing=True, **params):
       ``"create_if_missing"`` has to be ``False`` if ``"use_sas"`` is set. When ``"use_sas"`` is set,
       ``"account_key"`` is interpreted as Shared Access Signature (SAS) token.FIRE
       ``"max_connections"``: Maximum number of network connections used by one store (default: ``2``).
+      ``"socket_timeout"``: maximum timeout value in seconds (socket_timeout: ``100``).
     * ``"s3"``: Returns a plain ``simplekv.net.botostore.BotoStore``.
       Parameters must include ``"host"``, ``"bucket"``, ``"access_key"``, ``"secret_key"``.
       Optional parameters are
