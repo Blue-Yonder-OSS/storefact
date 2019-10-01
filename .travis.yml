@@ -16,9 +16,7 @@ after_success:
  - coveralls
 deploy:
   provider: pypi
-  user: BYPyPi
-  password:
-    secure: BKEU4wwquLvMO6k03P1dbSEXtgW+Ra9+EeuugrPCOfkiYMJRMCqUjGqsodeJ36FLIU+uIcejqT83amsE6fq9YtoZ8wRn455Zn4rS2hCrNjM92fvGan9xLDT89V+jirncXrwBGTilz+hXIV3z96tDxq1ErBqfwRlGzUeUul1YUrHlS1pFXsI7XSVZ4IaccWeb3nw0sW7h2RhDIf5vq2S9iRMpsn3Yf6d931veMHuTpzTnhOJbtQL9m4qB+IGX2PEEoFI4PbGrC07IblQjx8uRoN6N+KxdUnjkxaBEKw35tU8E77R3F7h89NEPAK+wpqYptyDZzqorM34CA19GSIn1jGRIaj9i9OSCsAP5prSHfY/+/wUBFhoHoJacpmlycJO/XjrPJmkjn6v1H8tQ6JNINGx2d1GqNEDtHfK6PBatOyT4FkjzTHyBX/ZgNSt/KoPFNJKfWnZLBd8Pzujonpag9w4+Pv0YmfzPoYIawd2Zca8u4S8MxrotZUdjhFG7qIh2faKxu87gY13k2F7ITBWNbqQQMnPzyPybaHNz+gjc/mT3cpnu3MH5PZl0ByVdP07/aNcLyZaXEA0Vi4M6YksEFJGZIf5/uqLHu4YK/Bnz9GsXthFqALld8jLKF7f7/CPgEY5zyBAeBl3LjnyUpUoyhHtqjuVmA2VeRfPFECoVCq0=
+  user: __token__
   distributions: sdist bdist_wheel
   on:
     tags: true
