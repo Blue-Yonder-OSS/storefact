@@ -23,6 +23,14 @@ good_urls = [
         account_key='deadbeef',
         container='1bucket1',
         max_connections=5)),
+    (u'azure://MYACCOUNT:deadbeef@1bucket1?param1=foo&param2=🍺&eat_more_🍎=&max_connections=5&max_block_size=4194304&&max_single_put_size=67108864', dict(
+        type='azure',
+        account_name='MYACCOUNT',
+        account_key='deadbeef',
+        container='1bucket1',
+        max_connections=5,
+        max_block_size=['4194304'],
+        max_single_put_size=['67108864'])),
     (u'fs://this/is/a/relative/path', dict(type='fs', path='this/is/a/relative/path')),
     (u'fs:///an/absolute/path', dict(type=u'fs', path=u'/an/absolute/path')),
     (u's3://access_key:secret_key@endpoint:1234/bucketname', dict(

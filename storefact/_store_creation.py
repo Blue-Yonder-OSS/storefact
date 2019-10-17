@@ -47,6 +47,8 @@ def _create_store_azure(type, params):
             checksum=params.get('checksum', True),
             max_connections=params.get('max_connections', 2),
             socket_timeout=params.get('socket_timeout', (20, 100)),
+            max_block_size=params.get('max_block_size',(4194304)),
+            max_single_put_size=params.get('max_single_put_size', (67108864)),
         )
     else:
         return HAzureBlockBlobStore(
@@ -57,6 +59,8 @@ def _create_store_azure(type, params):
             checksum=params.get('checksum', True),
             max_connections=params.get('max_connections', 2),
             socket_timeout=params.get('socket_timeout', (20, 100)),
+            max_block_size=params.get('max_block_size', (4194304)),
+            max_single_put_size=params.get('max_single_put_size', (67108864)),
         )
 
 

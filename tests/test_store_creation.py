@@ -24,6 +24,8 @@ def test_create_store_azure(mocker):
         max_connections=2,
         public=False,
         socket_timeout=(20, 100),
+        max_block_size=4194304,
+        max_single_put_size=67108864,
     )
     mock_hazure.assert_not_called()
 
@@ -47,6 +49,8 @@ def test_create_store_hazure(mocker):
         max_connections=2,
         public=False,
         socket_timeout=(20, 100),
+        max_block_size=4194304,
+        max_single_put_size=67108864,
     )
 
 

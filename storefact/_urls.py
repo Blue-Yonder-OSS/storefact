@@ -18,6 +18,7 @@ def url2dict(url, raise_on_extra_params=False):
     s3://access_key:secret_key@endpoint/bucket[?create_if_missing=true]
     azure://account_name:account_key@container[?create_if_missing=true][?max_connections=2]
     azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)]
+    azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)][?max_block_size=4*1024*1024&max_single_put_size=64*1024*1024]
     """
     u = urisplit(url)
     parsed = dict(
@@ -87,6 +88,10 @@ def extract_params(scheme, host, port, path, query, userinfo):
             params['max_connections'] = int(query.pop(u'max_connections')[-1])
         if u'socket_timeout' in query:
             params['socket_timeout'] = query.pop(u'socket_timeout')
+        if u'max_block_size' in query:
+            params['max_block_size'] = query.pop(u'max_block_size')
+        if u'max_single_put_size' in query:
+            params['max_single_put_size'] = query.pop(u'max_single_put_size')
         return params
 
     raise ValueError('Unknown storage type "{}"'.format(scheme))
