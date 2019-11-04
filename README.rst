@@ -1,7 +1,7 @@
 .. image:: https://travis-ci.org/JDASoftwareGroup/storefact.svg?branch=master
     :target: https://travis-ci.org/JDASoftwareGroup/storefact
-.. image:: https://coveralls.io/repos/github/JDASoftwareGroup/storefact/badge.svg?branch=master
-    :target: https://coveralls.io/github/JDASoftwareGroup/storefact?branch=master
+.. image:: https://codecov.io/gh/JDASoftwareGroup/storefact/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/JDASoftwareGroup/storefact
 .. image:: https://readthedocs.org/projects/storefact/badge/?version=latest
     :target: http://storefact.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
