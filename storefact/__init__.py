@@ -39,6 +39,8 @@ def get_store_from_url(url):
     * BotoStore ``s3://access_key:secret_key@endpoint/bucket[?create_if_missing=true]``
     * AzureBlockBlockStorage: ``azure://account_name:account_key@container[?create_if_missing=true]``
     * AzureBlockBlockStorage (SAS): ``azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false``
+    * AzureBlockBlockStorage (SAS): ``azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)]``
+    * AzureBlockBlockStorage (SAS): ``azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)][?max_block_size=4*1024*1024&max_single_put_size=64*1024*1024]``
     """
     return get_store(**url2dict(url))
 
@@ -54,7 +56,9 @@ def get_store(type, create_if_missing=True, **params):
       ``"create_if_missing"`` has to be ``False`` if ``"use_sas"`` is set. When ``"use_sas"`` is set,
       ``"account_key"`` is interpreted as Shared Access Signature (SAS) token.FIRE
       ``"max_connections"``: Maximum number of network connections used by one store (default: ``2``).
-      ``"socket_timeout"``: maximum timeout value in seconds (socket_timeout: ``100``).
+      ``"socket_timeout"``: maximum timeout value in seconds (socket_timeout: ``200``).
+      ``"max_single_put_size"``: max_single_put_size is the largest size upload supported in a single put call.
+      ``"max_block_size"``: maximum block size is maximum size of the blocks(maximum size is <= 100MB)
     * ``"s3"``: Returns a plain ``simplekv.net.botostore.BotoStore``.
       Parameters must include ``"host"``, ``"bucket"``, ``"access_key"``, ``"secret_key"``.
       Optional parameters are
