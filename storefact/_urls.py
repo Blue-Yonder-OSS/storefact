@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from uritools import urisplit
+import base64
+import json
+import io
 
 
 TRUEVALUES = (u'true',)
@@ -19,6 +22,7 @@ def url2dict(url, raise_on_extra_params=False):
     azure://account_name:account_key@container[?create_if_missing=true][?max_connections=2]
     azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)]
     azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)][?max_block_size=4*1024*1024&max_single_put_size=64*1024*1024]
+    gcs://<base64 encoded credentialsJSON>@bucket_name[?create_if_missing=true][?bucket_creation_location=EUROPE-WEST1]
     """
     u = urisplit(url)
     parsed = dict(
@@ -63,6 +67,15 @@ def extract_params(scheme, host, port, path, query, userinfo):
             params['password'] = userinfo
         if path:
             params['db'] = int(path)
+        return params
+    if scheme in ('gcs', 'hgcs'):
+        credentials_b64 = userinfo
+        params = {'type': scheme, 'bucket_name': host}
+        params['credentials'] = base64.urlsafe_b64decode(
+            credentials_b64.encode()
+        )
+        if 'bucket_creation_location' in query:
+            params[u'bucket_creation_location'] = query.pop(u'bucket_creation_location')[0]
         return params
     if scheme in ('fs', 'hfs'):
         return {'type': scheme, 'path': host + path}

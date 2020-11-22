@@ -16,6 +16,8 @@ def create_store(type, params):
         return _create_store_hs3(type, params)
     if type in ('s3'):
         return _create_store_s3(type, params)
+    if type in ('gcs', 'hgcs'):
+        return _create_store_gcs(type, params)
     if type in ('hfs', 'hfile', 'filesystem'):
         return _create_store_hfs(type, params)
     if type in ('fs', 'file'):
@@ -27,6 +29,20 @@ def create_store(type, params):
     if type in ('redis'):
         return _create_store_redis(type, params)
     raise ValueError('Unknown store type: ' + str(type))
+
+
+def _create_store_gcs(store_type, params):
+    from simplekv.net.gcstore import GoogleCloudStore
+    from google.oauth2.service_account import Credentials
+    from ._hstores import HGoogleCloudStore
+    import json
+
+    if type(params['credentials']) == bytes:
+        account_info = json.loads(params['credentials'].decode())
+        params['credentials'] = Credentials.from_service_account_info(account_info)
+        params['project'] = account_info['project_id']
+
+    return GoogleCloudStore(**params) if store_type == 'gcs' else HGoogleCloudStore(**params)
 
 
 def _create_store_azure(type, params):

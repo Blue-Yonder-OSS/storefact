@@ -10,6 +10,7 @@ from simplekv.memory import DictStore
 from simplekv.memory.redisstore import RedisStore
 from simplekv.net.azurestore import AzureBlockBlobStore
 from simplekv.net.botostore import BotoStore
+from simplekv.net.gcstore import GoogleCloudStore
 
 
 class HDictStore(ExtendedKeyspaceMixin, DictStore):
@@ -28,6 +29,10 @@ class HBotoStore(ExtendedKeyspaceMixin, BotoStore):
     def size(self, key):
         k = self.bucket.lookup(self.prefix + key)
         return k.size
+
+
+class HGoogleCloudStore(ExtendedKeyspaceMixin, GoogleCloudStore):
+    pass
 
 
 class HFilesystemStore(ExtendedKeyspaceMixin, FilesystemStore):
