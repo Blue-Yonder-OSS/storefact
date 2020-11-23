@@ -112,6 +112,7 @@ def test_create_store_s3(mocker):
 
 def test_create_store_hfs(mocker):
     mock_hfs = mocker.patch("storefact._hstores.HFilesystemStore")
+    mock_makedirs = mocker.patch("os.makedirs")
     create_store(
         "hfs",
         {
@@ -121,11 +122,12 @@ def test_create_store_hfs(mocker):
         },
     )
     mock_hfs.assert_called_once_with('this/is/a/relative/path')
+    mock_makedirs.assert_called_once_with('this/is/a/relative/path')
 
 
-@pytest.mark.skip(reason="some issue here")
 def test_create_store_fs(mocker):
-    mock_fs = mocker.patch("simplekv.fs.FilesystemStore")
+    mock_fs = mocker.patch("storefact._store_creation.FilesystemStore")
+    mock_makedirs = mocker.patch("os.makedirs")
     create_store(
         "fs",
         {
@@ -135,6 +137,7 @@ def test_create_store_fs(mocker):
         }
     )
     mock_fs.assert_called_once_with('this/is/a/relative/fspath')
+    mock_makedirs.assert_called_once_with('this/is/a/relative/fspath')
 
 
 def test_create_store_mem(mocker):
