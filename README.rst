@@ -83,7 +83,7 @@ URL and store types:
            from pathlib import Path
            import base64
            json_as_bytes = Path(<path_to_json>).read_bytes()
-           json_b64_encoded = base64.urlsafe_b64encode(b).decode()
+           json_b64 = base64.urlsafe_b64encode(json_as_bytes).decode()
 
 
 Storage URLs starting with a :code:`h` indicate extended allowed characters. This allows the usage of slashes and spaces in blob names.
