@@ -76,7 +76,7 @@ URL and store types:
     * with SAS and additional parameters: :code:`azure://account_name:shared_access_signature@container?use_sas&create_if_missing=false[?max_connections=2&socket_timeout=(20,100)][?max_block_size=4*1024*1024&max_single_put_size=64*1024*1024]`
 * Google Cloud Store: (:code:`gcs://` and :code:`hgcs://`):
     * :code:`hgcs://<base64 encoded credentials JSON>@bucket_name[?create_if_missing=true&bucket_creation_location=EUROPE-WEST3]`
-        Get the encoded credentials as string like so:
+        Get the encoded credentials as a string like so:
 
         .. code-block:: python
 
