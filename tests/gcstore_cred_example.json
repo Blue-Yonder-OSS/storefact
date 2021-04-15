@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "central-splice-296415",
+  "private_key_id": "df9971f2b0399b3b09ea2cd4194ef8cc3d07183d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDaCnuop7/PuaAa\n66OMLEj81zIrJTYrCOs2MsZ6zFFfZxipH9FH/Hd0+sWH4fSGFBGdop6fkJ9prRYy\nZUMFb+H5IAiOBzNzEh2Ls22wJ3mATHy0DcV8d2ip+/jCauelEKdHllMTa2VkBhrh\nnarYwYLI65QaMjiqIwyi40/3EtbjBROwblFkKMx0I+hVdfMn2yY698jiqjaGI65E\naw3bL4yLftSylTGHnZMJJTUNzgwVsdbITib8BLdqNMFX07hCErACsjNGVQexEQhs\nbCg4TTn7oEEepa/cgezxidM48saupZGp/BOh8+ZNGBSFYW9TZIm6/C7y7+loj42e\nASqL44nRAgMBAAECggEAELbGgWhwgewlC4M+K3fWlXkqiZel5hkeLK6qO84PO8yz\nnX1IpefCwXcarr6hp6iArDCDz8/+hFOGFNFh2JgZvqbXuQlwxnSgSq3zrdHs1Kqo\nUYYPuimOHp+n00FuJd9Xr1tk3WN5Z3g3Vc2oA8sbqyqx1Os+ID6lEJRztAkf61F7\nVugQupmQLyDtOUu/0X7xIc2ubV3IBAayAUWA1NIHFhti5Is0w0P55++ilVo14rOj\n16C3EfgF0BMYf2nT0Tu+FfPvKXX3sPrHLLbPKgjNMHb2PfP8F/eDvO7f+PhQLpvR\nvEpNkrvqeAi9Oot+c3fQfqlmYEVBW6DlB/TbbPfgBQKBgQDszWkbDdrZda3DV53k\nvS5HA9pg21qdM2lTt5uESQRkMPiVUa2ojX7JaB4krf92eh965D/KK6+3wipkU42e\nvbZCXKLTq4WwI/avkXtCe5WdWstsDxOps7Tz7x21oSNrxOaNd3GNOvgj3G4m+kmY\ntxL125g2c270tnRkwNyJZwlVlQKBgQDrt7K+HnCPhuvW4x4ubmhNLsrx1EQTYJPn\ng6AGzyJcAV/3JjIidr0N5EO3NhH208OolOcaI4DfMPTXuRTgElOsOlI5dI80I1qf\naCv6A3/kAbuiwcWDwqzo4kmfMyDD9EGUH2EDlB64Fd8gmflnZZbLDG4SOR/FwbL3\nzIYUbracTQKBgFKUw+3KZCLoFiQEfyzRCL19S3/xn2UpE7c9Vb/JUv250kcIh/46\n8hc89x4li+x+ZFIQHWrc11fHH8+DD+VnFZOJCMO2klW+BP5vRsQFo0SP8FcL3viU\nkitrnTnFKzwfG6QEHpZ5FSY0bjmrmVTnq3YQEcITeYNfybGFTKOiSjANAoGAIi0K\nL2J+c3DedNONJrI/USF9rz5VeHHCQAjnhNU3aBuS7GSPVEve8UqtPr0KMb1WWvTr\n5PBM2Q9iEHz3N92wYAI8tbPep3KQyxfxeFhVjJtrtxddKdNp+oIEpp5lG8QoVe+O\nw1QQeCRDq5hnfsRN7raopt+9aZDCAAeZUREUTOkCgYEAnVc+NrSVsEB34dDtLYnF\nU0e7WNLzqI6a7/Q2SERLm0ivYOgJF533xdoVXGIp4YMwIRxzgNX0WbTf7ECvl5vy\nNSWfLMTJsPk66LLfnV4bv7RxBnpaiZQkhPBcl2aZ/e0XkhP7otV34UFMPA3tbFDu\nFAmi+q542aj9wW/MIGRyxqU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "storefact-testing@central-splice-296415.iam.gserviceaccount.com",
+  "client_id": "100559070598539809356",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/storefact-testing%40central-splice-296415.iam.gserviceaccount.com"
+}
