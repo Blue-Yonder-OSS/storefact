@@ -67,5 +67,19 @@ def test_bad_url2dict(url, raises):
         storefact.url2dict(url)
 
 
+def test_url2dict_with_protocol_and_point_query_params():
+    url = u'azure://MYACCOUNT:dead%2Fbeef@1buc-ket1?create_if_missing=true&default_endpoints_protocol=http&blob_endpoint=http://network:888/devAcc'
+    expected = dict(
+        type='azure',
+        account_name='MYACCOUNT',
+        account_key='dead/beef',
+        container='1buc-ket1',
+        create_if_missing=True,
+        default_endpoints_protocol="http",
+        blob_endpoint="http://network:888/devAcc"
+    )
+    assert storefact.url2dict(url) == expected
+
+
 def test_roundtrip():
     assert isinstance(storefact.get_store_from_url(u'memory://#wrap:readonly'), simplekv.decorator.ReadOnlyDecorator)

@@ -44,6 +44,12 @@ def url2dict(url, raise_on_extra_params=False):
     if u'create_if_missing' in parsed['query']:
         create_if_missing = parsed['query'].pop(u'create_if_missing')[-1]  # use last appearance of key
         params['create_if_missing'] = create_if_missing in TRUEVALUES
+    if u'blob_endpoint' in parsed['query']:
+        blob_endpoint = parsed['query'].pop(u'blob_endpoint')[-1]
+        params['blob_endpoint'] = blob_endpoint
+    if u'default_endpoints_protocol' in parsed['query']:
+        default_endpoints_protocol = parsed['query'].pop(u'default_endpoints_protocol')[-1]
+        params['default_endpoints_protocol'] = default_endpoints_protocol
 
     # get store-specific parameters:
     store_params = extract_params(**parsed)

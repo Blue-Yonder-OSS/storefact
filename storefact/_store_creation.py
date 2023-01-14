@@ -111,9 +111,13 @@ def _build_azure_url(
         use_sas=False, **kwargs):
     protocol = default_endpoints_protocol or 'https'
     if use_sas:
-        return ('DefaultEndpointsProtocol={protocol};AccountName={account_name};'
-                'SharedAccessSignature={shared_access_signature}'.format(
-                    protocol=protocol, account_name=account_name, shared_access_signature=account_key))
+        conn_string = ('DefaultEndpointsProtocol={protocol};AccountName={account_name};'
+                       'SharedAccessSignature={shared_access_signature}'.format(
+            protocol=protocol, account_name=account_name, shared_access_signature=account_key))
     else:
-        return 'DefaultEndpointsProtocol={protocol};AccountName={account_name};AccountKey={account_key}'.format(
+        conn_string = 'DefaultEndpointsProtocol={protocol};AccountName={account_name};AccountKey={account_key}'.format(
             protocol=protocol, account_name=account_name, account_key=account_key)
+
+    if blob_endpoint:
+        conn_string += ';BlobEndpoint={blob_endpoint}'.format(blob_endpoint=blob_endpoint)
+    return conn_string
