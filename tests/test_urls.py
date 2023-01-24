@@ -2,6 +2,7 @@
 
 import pytest
 import storefact
+from storefact._urls import extract_from_query_params
 import simplekv.decorator
 
 good_urls = [
@@ -87,6 +88,120 @@ def test_url2dict_with_protocol_and_point_query_params():
         blob_endpoint="http://network:888/devAcc"
     )
     assert storefact.url2dict(url) == expected
+
+
+def test_extract_query_param_when_query_params_is_null():
+    query_params = None
+    params = {
+        'Hello': 'test'
+    }
+    key = "test"
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 1
+
+
+def test_extract_query_param_when_query_params_is_empty():
+    query_params = {}
+    params = {
+        'Hello': 'test'
+    }
+    key = "test"
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 1
+
+
+def test_extract_query_param_when_params_is_null():
+    query_params = {
+        'create_if_missing': ['true']
+    }
+    params = None
+    key = "test"
+    extract_from_query_params(query_params, params, key)
+    assert params is None
+
+
+def test_extract_query_param_when_params_is_empty():
+    query_params = {
+        'create_if_missing': ['true']
+    }
+    params = {}
+    key = "create_if_missing"
+    extract_from_query_params(query_params, params, key, is_boolean_type=True)
+    assert params is not None and len(params) == 1
+    assert params[key] is True
+
+
+def test_extract_query_param_when_key_is_null():
+    query_params = {
+        'create_if_missing': ['true']
+    }
+    params = {}
+    key = None
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 0
+
+
+def test_extract_query_param_when_key_is_empty_string():
+    query_params = {
+        'create_if_missing': ['true']
+    }
+    params = {}
+    key = ''
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 0
+
+
+def test_extract_query_param_when_value_is_not_boolean():
+    query_params = {
+        'create_if_missing': ['true']
+    }
+    params = {}
+    key = "create_if_missing"
+    extract_from_query_params(query_params, params, key, is_boolean_type=False)
+    assert params is not None and len(params) == 1
+    assert params[key] == 'true'
+
+
+def test_extract_query_param_when_key_is_not_found_in_query_params():
+    query_params = {
+        'create_if_missing': ['true']
+    }
+    params = {}
+    key = "key_not_found"
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 0
+
+
+def test_extract_query_param_when_key_is_extracted():
+    query_params = {
+        'create_if_missing': ['true'],
+        'deploy': ['now']
+    }
+
+    params = {
+        'use_sas': True
+    }
+    key = "deploy"
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 2
+    assert params['use_sas'] is True
+    assert params['deploy'] == 'now'
+
+
+def test_extract_query_param_when_key_already_exit():
+    query_params = {
+        'create_if_missing': ['true'],
+        'deploy': ['now']
+    }
+
+    params = {
+        'deploy': 'later'
+    }
+
+    key = "deploy"
+    extract_from_query_params(query_params, params, key)
+    assert params is not None and len(params) == 1
+    assert params['deploy'] == 'now'
 
 
 def test_roundtrip():
