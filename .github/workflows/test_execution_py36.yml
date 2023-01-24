@@ -1,5 +1,5 @@
 ---
-name: Run unit and component test cases
+name: Run unit tests for python 3.6
 
 on:
   push:
