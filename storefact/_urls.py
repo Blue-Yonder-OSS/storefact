@@ -51,7 +51,7 @@ def url2dict(url, raise_on_extra_params=False):
     return params
 
 
-def extract_from_query_params(query_params: dict, params: dict, key: str, is_boolean_type: bool = False):
+def extract_from_query_params(query_params, params, key, is_boolean_type=False):
     """
 
     Args:
