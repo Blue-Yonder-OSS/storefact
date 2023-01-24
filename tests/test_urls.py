@@ -5,6 +5,14 @@ import storefact
 import simplekv.decorator
 
 good_urls = [
+    (u'azure://MYACCOUNT:dead%2Fbeef@1buc-ket1?param1=foo&default_endpoints_protocol=http&blob_endpoint=http://host:port&create_if_missing=true', dict(
+        type='azure',
+        account_name='MYACCOUNT',
+        account_key='dead/beef',
+        container='1buc-ket1',
+        create_if_missing=True,
+        default_endpoints_protocol='http',
+        blob_endpoint='http://host:port')),
     (u'azure://MYACCOUNT:dead%2Fbeef@1buc-ket1?param1=foo&param2=🍺&eat_more_🍎=1&create_if_missing=true', dict(
         type='azure',
         account_name='MYACCOUNT',

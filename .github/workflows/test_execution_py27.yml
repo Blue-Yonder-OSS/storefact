@@ -1,0 +1,21 @@
+---
+name: Run unit and component test cases
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  tests:
+    name: "Test Execution"
+    runs-on: "ubuntu-20.04"
+    steps:
+      - name: "Set up Python 2.7"
+        uses: "actions/setup-python@v3"
+        with:
+          python-version: "2.7"
+          cache: 'pip'
+      - name: "Install dependencies"
+        run: |
+          tox
