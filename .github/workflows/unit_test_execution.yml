@@ -4,23 +4,22 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python: ["2.7", "3.5", "3.6", "3.9"]
-
+        python-version: ["2.7", "3.5", "3.6", "3.9"]
+    name: Python ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v1
         with:
-          python-version: ${{ matrix.python }}
-      - name: Install tox and any other packages
-        run: |
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - run: |
           python -m pip install --upgrade pip
           pip install setuptools_scm wheel
           pip install -r requirements.txt
           pip install tox
       - name: Run tox
-        run: tox
+          run: tox
