@@ -54,6 +54,32 @@ def test_create_store_hazure(mocker):
     )
 
 
+def test_create_store_hazure_with_protocol_and_blob_endpoint(mocker):
+    mock_hazure = mocker.patch("storefact._hstores.HAzureBlockBlobStore")
+    create_store(
+        "hazure",
+        {
+            "account_name": "ACCOUNT",
+            "account_key": "KEY",
+            "container": "cont_name",
+            "create_if_missing": True,
+            "blob_endpoint": "http://local:2121",
+            "default_endpoints_protocol": "http"
+        },
+    )
+    mock_hazure.assert_called_once_with(
+        checksum=True,
+        conn_string="DefaultEndpointsProtocol=http;AccountName=ACCOUNT;AccountKey=KEY;BlobEndpoint=http://local:2121",
+        container="cont_name",
+        create_if_missing=True,
+        max_connections=2,
+        public=False,
+        socket_timeout=(20, 100),
+        max_block_size=4194304,
+        max_single_put_size=67108864,
+    )
+
+
 def test_create_store_azure_inconsistent_params():
     with pytest.raises(
             Exception, match="create_if_missing is incompatible with the use of SAS tokens"

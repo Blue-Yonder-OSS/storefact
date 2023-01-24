@@ -41,14 +41,36 @@ def url2dict(url, raise_on_extra_params=False):
         wrappers = wrap_spec[-1].partition('wrap:')[2]  # remove the 'wrap:' part
         params['wrap'] = wrappers
 
-    if u'create_if_missing' in parsed['query']:
-        create_if_missing = parsed['query'].pop(u'create_if_missing')[-1]  # use last appearance of key
-        params['create_if_missing'] = create_if_missing in TRUEVALUES
+    extract_from_query_params(parsed['query'], params, "create_if_missing", is_boolean_type=True)
+    extract_from_query_params(parsed['query'], params, "blob_endpoint")
+    extract_from_query_params(parsed['query'], params, "default_endpoints_protocol")
 
     # get store-specific parameters:
     store_params = extract_params(**parsed)
     params.update(store_params)
     return params
+
+
+def extract_from_query_params(query_params, params, key, is_boolean_type=False):
+    """
+
+    Args:
+        query_params: dictionary to extract from
+        params: dictionary to extract to
+        key: key to look for in query_params
+        is_boolean_type: if expected value is in Boolean True, False then pass the value as True.
+        Default is False.
+
+    Returns:
+        None
+    note: Updates the params dictionary as objects are pass by reference
+
+    """
+    if query_params and params is not None and key in query_params:
+        value = query_params.pop(key)[-1]
+        if is_boolean_type:
+            value = value in TRUEVALUES
+        params[key] = value
 
 
 def extract_params(scheme, host, port, path, query, userinfo):
