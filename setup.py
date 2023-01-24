@@ -46,5 +46,6 @@ setup(
         's3': ['boto'],
         'azure': ['azure-storage-blob'],
     },
-    setup_requires=['setuptools_scm']
+    setup_requires=['setuptools_scm'],
+    long_description_content_type='text/markdown'
 )
