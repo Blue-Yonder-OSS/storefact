@@ -27,4 +27,4 @@ jobs:
           pip install setuptools_scm wheel
           pip install -r requirements.txt
           pip install tox
-          tox -e 36
+          tox -e py36
