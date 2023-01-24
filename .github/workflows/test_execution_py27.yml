@@ -23,4 +23,8 @@ jobs:
           cache: 'pip'
       - name: "Install dependencies"
         run: |
-          tox
+          python -m pip install --upgrade pip
+          pip install setuptools_scm wheel
+          pip install -r requirements.in
+          pip install tox
+          tox -e 27
