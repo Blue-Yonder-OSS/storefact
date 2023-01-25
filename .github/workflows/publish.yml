@@ -10,17 +10,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: '3.9'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install build
+        python -m pip install build wheel twine
+        python -m pip install --upgrade setuptools build wheel twine
     - name: Build package
-      run: python -m build
+      run: | 
+        python -m build
+        twine check dist/*
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
         password: ${{ secrets.STOREFACT_PYPI }}
+        verify_metadata: false
+        verbose: true
