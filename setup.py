@@ -2,7 +2,6 @@
 import io
 from os.path import dirname
 from os.path import join
-from pathlib import Path
 
 from setuptools import setup
 
@@ -14,8 +13,7 @@ def read(*names, **kwargs):
     ).read()
 
 
-this_directory = Path(__file__).parent
-long_description = (this_directory / "README.rst").read_text()
+long_description = read("README.rst")
 
 
 instreq = [l.rstrip() for l in read('requirements.txt').splitlines()
