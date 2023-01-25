@@ -1,10 +1,7 @@
 # -*- encoding: utf-8 -*-
 import io
-import re
-import os
 from os.path import dirname
 from os.path import join
-import inspect
 
 from setuptools import setup
 
@@ -14,6 +11,7 @@ def read(*names, **kwargs):
         join(dirname(__file__), *names),
         encoding=kwargs.get("encoding", "utf8")
     ).read()
+
 
 instreq = [l.rstrip() for l in read('requirements.txt').splitlines()
            if not l.startswith('#')]
