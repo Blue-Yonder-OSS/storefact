@@ -2,6 +2,7 @@
 import io
 from os.path import dirname
 from os.path import join
+from pathlib import Path
 
 from setuptools import setup
 
@@ -11,6 +12,10 @@ def read(*names, **kwargs):
         join(dirname(__file__), *names),
         encoding=kwargs.get("encoding", "utf8")
     ).read()
+
+
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.rst").read_text()
 
 
 instreq = [l.rstrip() for l in read('requirements.txt').splitlines()
@@ -45,5 +50,6 @@ setup(
         'azure': ['azure-storage-blob'],
     },
     setup_requires=['setuptools_scm'],
+    long_description=long_description,
     long_description_content_type='text/markdown'
 )
