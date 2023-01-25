@@ -1,10 +1,7 @@
 # -*- encoding: utf-8 -*-
 import io
-import re
-import os
 from os.path import dirname
 from os.path import join
-import inspect
 
 from setuptools import setup
 
@@ -14,6 +11,10 @@ def read(*names, **kwargs):
         join(dirname(__file__), *names),
         encoding=kwargs.get("encoding", "utf8")
     ).read()
+
+
+long_description = read("README.rst")
+
 
 instreq = [l.rstrip() for l in read('requirements.txt').splitlines()
            if not l.startswith('#')]
@@ -47,5 +48,6 @@ setup(
         'azure': ['azure-storage-blob'],
     },
     setup_requires=['setuptools_scm'],
+    long_description=long_description,
     long_description_content_type='text/markdown'
 )
