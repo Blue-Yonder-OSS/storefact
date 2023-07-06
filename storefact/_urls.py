@@ -96,6 +96,8 @@ def extract_params(scheme, host, port, path, query, userinfo):
             'secret_key': secret_key,
             'bucket': path[1:],
         }
+        if (force_bucket_suffix := query.get(u'force_bucket_suffix')):
+            params["force_bucket_suffix"] = force_bucket_suffix[0]
         return params
     if scheme in ('azure', 'hazure'):
         account_name, account_key = _parse_userinfo(userinfo)

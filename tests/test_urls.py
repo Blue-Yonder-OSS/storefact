@@ -48,6 +48,13 @@ good_urls = [
         access_key=u'access_key',
         secret_key=u'secret_key',
         bucket=u'bucketname')),
+    (u's3://access_key:secret_key@endpoint:1234/bucketname?force_bucket_suffix=False', dict(
+        type=u's3',
+        host=u'endpoint:1234',
+        access_key=u'access_key',
+        secret_key=u'secret_key',
+        bucket=u'bucketname',
+        force_bucket_suffix=u'False')),
     (u'redis:///2', dict(type=u'redis', host=u'localhost', db=2)),
     (u'memory://#wrap:readonly', {'type':u'memory', 'wrap': u'readonly'}),
     (u'memory://', dict(type=u'memory')),
